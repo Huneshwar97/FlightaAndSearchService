@@ -12,9 +12,9 @@ class Cityrepository {
         }
     }
 
-    async deleteCity({cityId}){
+    async deleteCity(cityId){
         try{
-            await City.destory({
+            await City.destroy({
                 where:{
                     id:cityId
                 }
