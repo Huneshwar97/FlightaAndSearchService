@@ -13,9 +13,22 @@ class FlightRepository {
         if(data.departureAirport){
             filter.departureAirport=data.departureAirport;
         }
+        // if(data.minPrice && data.maxPrice){
+        //     Object.assign(filter,{[Op.and]:[
+        //         {price:{[Op.gte] :data.minPrice}},
+        //         {price:{[Op.lte] :data.maxPrice}}
+        //     ]});
+        // }
+        let priceFilter=[];
         if(data.minPrice){
-            Object.assign(filter,{price:{[Op.gte] :data.minPrice}});
+            priceFilter.push({price:{[Op.gte] :data.minPrice}});
+            // Object.assign(filter,{price:{[Op.gte] :data.minPrice}});
         }
+        if(data.maxPrice){
+            priceFilter.push({price:{[Op.lte] :data.maxPrice}});
+            // Object.assign(filter,{price:{[Op.lte] :data.minPrice}});
+        }
+        Object.assign(filter,{[Op.and]:priceFilter});
         return filter;
     }
 
